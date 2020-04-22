@@ -1,34 +1,63 @@
 html, body{
-		width: 100%;
+	width: 100%;
+	font-family: 'Lato', sans-serif;		
 }
 
-.container{
-	border:solid black 4px;
-	margin: 20px 10px;
+.container , .container_strengths{
+	margin: 0;
 	border-radius: 10px;
 	text-align: center;
 	width: 30%;
+	padding: 0 30px;
 }
 
 .draggable{
 	text-align: center;
-	background-color: #99ccff;
+	background-color: #7EBEC5;
 	margin: 5px auto;
 	padding: 5px;
 	font-size: 1rem;
 	border-radius: 5px;
+	color: black;
+	border: solid #7EBEC5 2px;
 }
+
 
 .draggable:hover{
 	cursor: move;
-	font-size: 1.1rem;
-	background-color: #86b4e3;
+	font-weight: bold;
+	background-color: #012648;
+	color: white;
 }
 
 .dragging{
-	background-color: #7be09b;
+	background-color: #012648;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: white; 
 }
 
 .draggedContainer{
-	border:  solid #26753f 4px;
+	border:  solid #0c71c3 4px;
+}
+
+.bigContainer{
+	width: 100%;
+	display: flex;
+}
+
+.strengthInput{
+	border-radius: 5px;
+	width: 95%;
+	text-align: center;
+	margin: 5px auto;
+	border: solid #012648 2px;
+	padding: 5px;
+}
+
+[contenteditable=true]:empty:before{
+	color: grey;
+	content: attr(placeholder);
+	pointer-events: none;
+	display: block; /* For Firefox */
 }
