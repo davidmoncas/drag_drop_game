@@ -3,11 +3,11 @@ html, body{
 	font-family: 'Lato', sans-serif;		
 }
 
-.container , .container_strengths{
+.container , .container_strengths , .container_actions{
 	margin: 0;
 	border-radius: 10px;
 	text-align: center;
-	width: 30%;
+	width: 23%;
 	padding: 0 30px;
 }
 
@@ -46,7 +46,7 @@ html, body{
 	display: flex;
 }
 
-.strengthInput{
+.strengthInput , .actionInput{
 	border-radius: 5px;
 	width: 95%;
 	text-align: center;
@@ -60,4 +60,22 @@ html, body{
 	content: attr(placeholder);
 	pointer-events: none;
 	display: block; /* For Firefox */
+}
+
+.subtitle{
+	min-height: 80px;
+}
+
+
+/*---------------      P R I N T      V E R S I O N   --------------*/
+@media print {
+  #weaknessesDrag{
+  	display: none;
+  }
+  .container{
+  	width: 30%;
+  }
+  .subtitle{
+  	display: none;
+  }
 }

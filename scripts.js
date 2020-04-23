@@ -4,7 +4,10 @@ const weaknessList=["Not taking criticism well" , "Impatient" , "Lazy",
 "Takes things personally" , "Hard headed", "Passive" , "Hates conflict",
 "Shy", "Lethargic", "Propense to drink" , "Propense to do drugs", 
 "Too strict" , "Short-sighted" , "Selfish", "Control freak", "Takes blame for others",
-"Blunt", "Greedy", "Righteous", "Stubborn", "Multitasker", "Suppress emotions"];
+"Blunt", "Greedy", "Righteous", "Stubborn", "Multitasker", "Suppress emotions" , "Impulsive","Bossy","Takes on Too Much"
+,"Aggressive","Critical of Others","Unfulfilled with Life","Fearful","Self Critical","Trouble With Teams","Close-Minded","Disorganized",
+"Hateful","Over Spender","Untrustworthy","Sarcastic","Complaining",
+"Arrogant","Lier","Self Destructive","Grouchy","Innapropiate","Always Thinking About Something Else"];
 
 
 
@@ -23,8 +26,10 @@ weaknessList.forEach(element=>{
 const draggables = document.querySelectorAll(".draggable");
 const containers = document.querySelectorAll(".container");
 const strengthsContainer = document.querySelector("#strengths");
+const actionsContainer = document.querySelector("#actions");
 let draggablesStates={};
 let strengths={};
+let actions={};
 
 console.log("script is load");
 
@@ -67,10 +72,9 @@ containers.forEach( container=> {
 	})
 
 	container.addEventListener('dragend', e=>{
-		//console.log( e);
 		container.classList.remove('draggedContainer');
 		// if an element is dropped in the drops, generate a new strength
-		console.log(draggablesStates[e.srcElement.lastChild.textContent]);
+		
 		if (container.id=="weaknessesDrop"){
 			if(draggablesStates[e.srcElement.lastChild.textContent]!==1){
 			
@@ -79,11 +83,24 @@ containers.forEach( container=> {
 			node.setAttribute("contentEditable","true");
 			node.setAttribute("placeholder","write a strength");
 			node.classList.add("strengthInput");
-
 			strengthsContainer.appendChild(node);
-			
-
 			strengths[e.srcElement.lastChild.textContent] = node;
+
+			node=document.createElement("P");
+			node.setAttribute("contentEditable","true");
+			node.setAttribute("placeholder","write an action");
+			node.classList.add("actionInput");
+			node.addEventListener('input', e=>{
+				const el=e.srcElement;
+				const index = [...el.parentElement.children].indexOf(el);
+				resizeElements(index);				
+			})
+
+
+			actionsContainer.appendChild(node);
+			actions[e.srcElement.lastChild.textContent] = node;
+
+
 			}
 
 
@@ -91,6 +108,7 @@ containers.forEach( container=> {
 		else{
 			if(draggablesStates[e.srcElement.lastChild.textContent]===1){
 				strengths[e.srcElement.lastChild.textContent].remove();
+				actions[e.srcElement.lastChild.textContent].remove();
 			}
 			draggablesStates[e.srcElement.lastChild.textContent]=0;
 
@@ -118,3 +136,11 @@ function getDragAfterContainer(container , y){
 
 }
 
+
+function resizeElements(index){
+	let size=Math.max(strengthsContainer.children[index].offsetHeight , weaknessesDrop.children[index].offsetHeight ,actionsContainer.children[index].offsetHeight );
+	// strengthsContainer.children[index].style.minHeight=size+"px";
+	// weaknessesDrop.children[index].style.minHeight=size+"px";
+	// actionsContainer.children[index].style.minHeight=size+"px";
+	console.log(size);
+}
