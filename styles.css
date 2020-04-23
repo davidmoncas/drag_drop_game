@@ -69,13 +69,31 @@ html, body{
 
 /*---------------      P R I N T      V E R S I O N   --------------*/
 @media print {
+
+
+body{
+	visibility: hidden;
+}	
+
   #weaknessesDrag{
   	display: none;
   }
   .container{
+  	visibility: visible;
   	width: 30%;
   }
   .subtitle{
   	display: none;
   }
+  .bigContainer{
+  	visibility: visible;
+  }
+
 }
+@page 
+{
+    size: auto;   /* auto is the initial value */
+    margin: 0mm;  /* this affects the margin in the printer settings */
+}
+
+
