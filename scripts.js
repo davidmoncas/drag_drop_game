@@ -144,3 +144,23 @@ function resizeElements(index){
 	// actionsContainer.children[index].style.minHeight=size+"px";
 	console.log(size);
 }
+
+
+// ------------------------------- S A V E    T O      P D F ---------------------------------------------
+ function genPDF()
+  {
+  	document.querySelector("#weaknessesDrag").style.display = 'none';	
+	html2canvas(document.querySelector(".bigContainer")).then(function (canvas) {
+
+	var img = canvas.toDataURL("image/png");
+	var doc = new jsPDF();
+
+
+	const imgProps= doc.getImageProperties(img);
+	const pdfWidth = doc.internal.pageSize.getWidth();
+	const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+	doc.addImage(img, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+	doc.save('test.pdf');        
+	});
+	document.querySelector("#weaknessesDrag").style.display = 'inline';	
+ }

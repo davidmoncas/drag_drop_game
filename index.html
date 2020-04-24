@@ -7,10 +7,12 @@
 </head>
 <body>
 
-	<div> 
-		<button onclick="window.print()">Print</button>
+	<div class="buttonsContainer"> 
+		<button onclick="window.print()" class="button">Print</button>
+		<button onclick="genPDF()" class="button">Download PDF</button>
 	 </div>
 
+	 <hr>
 
 	<div class="bigContainer">
 		<div class="container" id="weaknessesDrag">
@@ -26,22 +28,30 @@
 		<div class="container" id="weaknessesDrop">
 			<h3> Weakness </h3>
 			<p class="subtitle">STEP 1: Drag and Drop From Left Column </p>
+			 <hr>
 
 		</div>
 
 		<div class="container_strengths" id="strengths">
 			<h3> Strength </h3>
 			<p class="subtitle">STEP 2: Type a Personality Trait That Would Transform the Weakness Into a Strength</p>
+			 <hr>
 			
 		</div>
 
 		<div class="container_actions" id="actions">
 			<h3> Action </h3>
 			<p class="subtitle">STEP 3: Please Type ONE Action That You Can Take Today To Exercise That Strength. After That, Print The Document And Keep It On Your Desk</p>
+			 <hr>
 		</div>
 
 
 	</div>
+
+
+
+<script type="text/javascript" src="html2canvas.min.js"></script>
+<script type="text/javascript" src="jspdf.js"></script>
 <script type="text/javascript" src="scripts.js"></script>
 </body>
 </html>

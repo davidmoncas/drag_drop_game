@@ -66,6 +66,32 @@ html, body{
 	min-height: 80px;
 }
 
+.button{
+	background-color: #012648;
+	color: white;
+	font-size: 1.1rem;
+	border-radius: 5px;
+	text-decoration: none;
+	border: none;
+	padding: 5px 15px;
+	margin: auto 30px;
+}
+
+.button:hover{
+	background-color: #0055a3;
+	font-size: 1.2rem;
+	cursor: pointer;
+}
+
+.buttonsContainer{
+	width: 100%;
+	text-align: center;
+}
+hr{
+	width: 80%;
+	color: #012648;
+}
+
 
 /*---------------      P R I N T      V E R S I O N   --------------*/
 @media print {
