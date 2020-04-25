@@ -14,12 +14,12 @@ const weaknessList=["Not taking criticism well" , "Impatient" , "Lazy",
 const weaknessesDrag=document.querySelector("#weaknessesDrag");
 
 weaknessList.forEach(element=>{
-			let node=document.createElement("P");
-			node.setAttribute("draggable","true");
-			node.classList.add("draggable");
-			let textInner=document.createTextNode(element);
-			node.appendChild(textInner); 
-			weaknessesDrag.appendChild(node);
+	let node=document.createElement("P");
+	node.setAttribute("draggable","true");
+	node.classList.add("draggable");
+	let textInner=document.createTextNode(element);
+	node.appendChild(textInner); 
+	weaknessesDrag.appendChild(node);
 })
 
 
@@ -54,16 +54,11 @@ containers.forEach( container=> {
 	container.addEventListener('dragover' , e=>{
 		container.classList.add("draggedContainer")
 		e.preventDefault();
-		//const afterElement = getDragAfterContainer(container,e.clientY);
+
 		const draggable=document.querySelector('.dragging');
-		//if(afterElement==null){
-			container.appendChild(draggable);
 
-		// }
-		// else{
-		// 	container.insertBefore(draggable, afterElement);
+		container.appendChild(draggable);
 
-		// }
 
 	} )
 
@@ -90,12 +85,6 @@ containers.forEach( container=> {
 			node.setAttribute("contentEditable","true");
 			node.setAttribute("placeholder","write an action");
 			node.classList.add("actionInput");
-			node.addEventListener('input', e=>{
-				const el=e.srcElement;
-				const index = [...el.parentElement.children].indexOf(el);
-				resizeElements(index);				
-			})
-
 
 			actionsContainer.appendChild(node);
 			actions[e.srcElement.lastChild.textContent] = node;
@@ -137,13 +126,6 @@ function getDragAfterContainer(container , y){
 }
 
 
-function resizeElements(index){
-	let size=Math.max(strengthsContainer.children[index].offsetHeight , weaknessesDrop.children[index].offsetHeight ,actionsContainer.children[index].offsetHeight );
-	// strengthsContainer.children[index].style.minHeight=size+"px";
-	// weaknessesDrop.children[index].style.minHeight=size+"px";
-	// actionsContainer.children[index].style.minHeight=size+"px";
-	console.log(size);
-}
 
 
 // ------------------------------- S A V E    T O      P D F ---------------------------------------------
