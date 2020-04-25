@@ -1,13 +1,9 @@
 
-const weaknessList=["Not taking criticism well" , "Impatient" , "Lazy", 
-"Victimize yourself", "Easily bored", "Procastinate", "Without etiquete",
-"Takes things personally" , "Hard headed", "Passive" , "Hates conflict",
-"Shy", "Lethargic", "Propense to drink" , "Propense to do drugs", 
-"Too strict" , "Short-sighted" , "Selfish", "Control freak", "Takes blame for others",
-"Blunt", "Greedy", "Righteous", "Stubborn", "Multitasker", "Suppress emotions" , "Impulsive","Bossy","Takes on Too Much"
-,"Aggressive","Critical of Others","Unfulfilled with Life","Fearful","Self Critical","Trouble With Teams","Close-Minded","Disorganized",
-"Hateful","Over Spender","Untrustworthy","Sarcastic","Complaining",
-"Arrogant","Lier","Self Destructive","Grouchy","Innapropiate","Always Thinking About Something Else"];
+const weaknessList=["Not Taking Criticism Well","Impatient","Lazy","Feel Like a Victim","Easily Bored","Procrastinate","Takes Things Personally","Hard Headed",
+"Passive","Passive Agressive","Shy","Lethargic","Propensity to Drink","Propensity to do Drugs","Too Strict","Short-Sighted","Selfish","Control Freak"
+,"Not Taking Responsibility","Too Blunt","Greedy","Righteous","Stubborn","Multitasking","Suppress Emotions","Impulsive","Bossy","Takes on Too Much",
+"Aggressive","Critical of Others","Unfulfilled with Life","Fearful","Self Critical","Trouble With Teams","Close-Minded","Disorganized","Hateful","Over Spender","Untrustworthy",
+"Sarcastic","Complaining","Arrogant","Lier","Self Destructive","Grouchy","Innapropiate","Always Thinking About Something Else"];
 
 
 
