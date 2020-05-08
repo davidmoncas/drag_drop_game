@@ -20,14 +20,12 @@ weaknessList.forEach(element=>{
 
 
 const draggables = document.querySelectorAll(".draggable");
-const containers = document.querySelectorAll(".container");
+const containers = document.querySelectorAll(".container1");
 const strengthsContainer = document.querySelector("#strengths");
 const actionsContainer = document.querySelector("#actions");
 let draggablesStates={};
 let strengths={};
 let actions={};
-
-console.log("script is load");
 
 draggables.forEach( draggable=> {
 	draggable.addEventListener('dragstart',()=>{
@@ -125,20 +123,35 @@ function getDragAfterContainer(container , y){
 
 
 // ------------------------------- S A V E    T O      P D F ---------------------------------------------
+
+
+
+
  function genPDF()
   {
-  	document.querySelector("#weaknessesDrag").style.display = 'none';	
-	html2canvas(document.querySelector(".bigContainer")).then(function (canvas) {
+	const doc = new jsPDF()
+	console.log(doc);
+	let data=[]
+	let weaknessDrop=document.querySelector("#weaknessesDrop");
+	if (weaknessDrop.childElementCount<4) return;
+	for(let i=3;i<weaknessDrop.childElementCount;i++){
+		data.push([weaknessDrop.children[i].textContent ,strengthsContainer.children[i].textContent ,actionsContainer.children[i].textContent  ])
+	}
 
-	var img = canvas.toDataURL("image/png");
-	var doc = new jsPDF();
+	var img = new Image();
+	img.src= 'Website-Logo.jpg';
+	
+	doc.addImage(img, 'JPEG', 100, 10,30,17)  
 
+	doc.autoTable({
+	styles: {halign: 'center', textColor: '#000000' , lineColor: '#ffffff' , lineWidth:1 , minCellHeight:5 , font:'Lato-Regular'},
+	columnStyles: { 0: { fillColor: '#7EBEC5' } }, 
+	margin: { top: 35 },
+	headerStyles:{font:'Lato-Bold' , fillColor:'#ffffff'},
+	head: [['Weakness', 'Strength', 'Action']],
+	body: data
+	})
 
-	const imgProps= doc.getImageProperties(img);
-	const pdfWidth = doc.internal.pageSize.getWidth();
-	const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-	doc.addImage(img, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-	doc.save('test.pdf');        
-	});
-	document.querySelector("#weaknessesDrag").style.display = 'inline';	
+	doc.save('table.pdf')
+
  }

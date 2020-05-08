@@ -3,7 +3,7 @@ html, body{
 	font-family: 'Lato', sans-serif;		
 }
 
-.container , .container_strengths , .container_actions{
+.container1 , .container_strengths , .container_actions{
 	margin: 0;
 	border-radius: 10px;
 	text-align: center;
@@ -91,7 +91,27 @@ hr{
 	width: 80%;
 	color: #012648;
 }
+.logo_hidden{
+	visibility: hidden;	
+	display: none;  
+	margin: 0;
+}
 
+.logo_print{
+	width: 100%;
+	text-align: center;
+	visibility: visible;	 
+	display: inline-block; 
+}
+
+.width30{
+	width:30%;
+}
+
+
+.hidden{
+	display: none;
+}
 
 /*---------------      P R I N T      V E R S I O N   --------------*/
 @media print {
@@ -104,9 +124,11 @@ body{
   #weaknessesDrag{
   	display: none;
   }
-  .container{
+  .container1{
   	visibility: visible;
-  	width: 30%;
+  }
+  .container_actions , .container_actions{
+	  width: 30%;
   }
   .subtitle{
   	display: none;
@@ -114,6 +136,13 @@ body{
   .bigContainer{
   	visibility: visible;
   }
+  .logo_hidden{
+	width: 100%;
+	text-align: center;
+	visibility: visible;	 
+	display: inline-block; 
+}
+
 
 }
 @page 
