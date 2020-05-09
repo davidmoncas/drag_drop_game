@@ -20,17 +20,63 @@ weaknessList.forEach(element=>{
 
 
 const draggables = document.querySelectorAll(".draggable");
-const containers = document.querySelectorAll(".container1");
-const strengthsContainer = document.querySelector("#strengths");
-const actionsContainer = document.querySelector("#actions");
+
 let draggablesStates={};
-let strengths={};
-let actions={};
+
+
+let tableGame=document.querySelector("#tableGame");
+let tableContainer=document.querySelector("#tableContainer");
+
+let rowIndexToDelete;
+
+tableContainer.addEventListener('dragover',e=>{		// change the style when dragging an object inside
+	e.preventDefault();
+	tableContainer.classList.add("containerShaded");
+})
+
+tableContainer.addEventListener("dragleave" , ()=>{
+	tableContainer.classList.remove("containerShaded");
+})
+
+
+tableContainer.addEventListener('drop' , ()=>{		// drop an element inside the table
+	const draggable=document.querySelector('.dragging');
+	if(draggablesStates[draggable.textContent]==0){
+	let row = tableGame.insertRow(-1);
+	let col1=row.insertCell(0);
+	let col2=row.insertCell(1);
+	let col3=row.insertCell(2);
+	col1.appendChild(draggable);
+
+			
+	let node=document.createElement("P");
+	node.setAttribute("contentEditable","true");
+	node.setAttribute("placeholder","write a strength");
+	node.classList.add("strengthInput");
+	col2.appendChild(node);
+
+
+	node=document.createElement("P");
+	node.setAttribute("contentEditable","true");
+	node.setAttribute("placeholder","write an action");
+	node.classList.add("actionInput");
+
+	col3.appendChild(node);
+	draggablesStates[draggable.textContent]=1;
+}
+
+	tableContainer.classList.remove("containerShaded");
+
+})
+
+tableContainer.addEventListener('dragstart', ev=>{		// save the position of the row in the table, to delete it later
+	rowIndexToDelete=ev.srcElement.parentNode.parentNode.rowIndex;
+})
+
 
 draggables.forEach( draggable=> {
 	draggable.addEventListener('dragstart',()=>{
 		draggable.classList.add("dragging");
-
 	})
 
 
@@ -40,85 +86,29 @@ draggables.forEach( draggable=> {
 
 
 	draggablesStates[draggable.textContent]= "0";
-
-
 });
 
-containers.forEach( container=> {
-	container.addEventListener('dragover' , e=>{
-		container.classList.add("draggedContainer")
+
+weaknessesDrag.addEventListener('drop', ()=>{		// drop an element in the list of weakness
+	const draggable=document.querySelector('.dragging');
+
+	if(draggablesStates[draggable.textContent]===1){
+		draggablesStates[draggable.textContent]=0;
+		tableGame.deleteRow(rowIndexToDelete);
+	}		
+	weaknessesDrag.classList.remove('draggedContainer');
+	weaknessesDrag.appendChild(draggable);
+})
+
+weaknessesDrag.addEventListener('dragover', (e)=>{
+	weaknessesDrag.classList.add("draggedContainer")
 		e.preventDefault();
-
 		const draggable=document.querySelector('.dragging');
+})
 
-		container.appendChild(draggable);
-
-
-	} )
-
-	container.addEventListener('dragleave' , ()=>{
-		container.classList.remove('draggedContainer');
-	})
-
-	container.addEventListener('dragend', e=>{
-		container.classList.remove('draggedContainer');
-		// if an element is dropped in the drops, generate a new strength
-		
-		if (container.id=="weaknessesDrop"){
-			if(draggablesStates[e.srcElement.lastChild.textContent]!==1){
-			
-			draggablesStates[e.srcElement.lastChild.textContent]=1;
-			let node=document.createElement("P");
-			node.setAttribute("contentEditable","true");
-			node.setAttribute("placeholder","write a strength");
-			node.classList.add("strengthInput");
-			strengthsContainer.appendChild(node);
-			strengths[e.srcElement.lastChild.textContent] = node;
-
-			node=document.createElement("P");
-			node.setAttribute("contentEditable","true");
-			node.setAttribute("placeholder","write an action");
-			node.classList.add("actionInput");
-
-			actionsContainer.appendChild(node);
-			actions[e.srcElement.lastChild.textContent] = node;
-
-
-			}
-
-
-		}
-		else{
-			if(draggablesStates[e.srcElement.lastChild.textContent]===1){
-				strengths[e.srcElement.lastChild.textContent].remove();
-				actions[e.srcElement.lastChild.textContent].remove();
-			}
-			draggablesStates[e.srcElement.lastChild.textContent]=0;
-
-		}
-
-		})
-
-}
-
-);
-
-
-function getDragAfterContainer(container , y){
-	const draggableElements=[...container.querySelectorAll('.draggable:not(.dragging)')]
-
-
-
-	return draggableElements.reduce( (closest , child)=>{
-		const box = child.getBoundingClientRect();
-		const offset= y - box.top-box.height/2;
-		if(offset<0 && offset > closest.offset) {return {offset:offset , element:child}} 
-		else { return closest} 
-
-	} , {offset:Number.NEGATIVE_INFINITY }).element;
-
-}
-
+weaknessesDrag.addEventListener('dragleave' , ()=>{
+	weaknessesDrag.classList.remove('draggedContainer');
+})
 
 
 
@@ -130,13 +120,18 @@ function getDragAfterContainer(container , y){
  function genPDF()
   {
 	const doc = new jsPDF()
-	console.log(doc);
 	let data=[]
 	let weaknessDrop=document.querySelector("#weaknessesDrop");
-	if (weaknessDrop.childElementCount<4) return;
-	for(let i=3;i<weaknessDrop.childElementCount;i++){
-		data.push([weaknessDrop.children[i].textContent ,strengthsContainer.children[i].textContent ,actionsContainer.children[i].textContent  ])
+	// if (weaknessDrop.childElementCount<4) return;
+	// for(let i=3;i<weaknessDrop.childElementCount;i++){
+	// 	data.push([weaknessDrop.children[i].textContent ,strengthsContainer.children[i].textContent ,actionsContainer.children[i].textContent  ])
+	// }
+
+	for(let i=2;i<tableGame.rows.length;i++){
+		data.push([tableGame.rows[i].cells[0].innerText , tableGame.rows[i].cells[1].innerText , tableGame.rows[i].cells[2].innerText]);
 	}
+
+
 
 	var img = new Image();
 	img.src= 'Website-Logo.jpg';

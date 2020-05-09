@@ -3,12 +3,11 @@ html, body{
 	font-family: 'Lato', sans-serif;		
 }
 
-.container1 , .container_strengths , .container_actions{
+#weaknessesDrag {
 	margin: 0;
 	border-radius: 10px;
 	text-align: center;
-	width: 23%;
-	padding: 0 30px;
+	width: 20%;
 }
 
 .draggable{
@@ -20,8 +19,30 @@ html, body{
 	border-radius: 5px;
 	color: black;
 	border: solid #7EBEC5 2px;
+	width: 90%;
 }
 
+#tableContainer{
+	width: 80%;
+}
+
+.containerShaded{
+	border:solid #0c71c3 4px ;
+	border-radius: 10px;
+	background-color: #e6fcff;
+}
+
+#tableGame{
+	table-layout: fixed;
+	width: 95%;
+	border-collapse: collapse;
+}
+
+td{
+	width: 30%;
+	text-align: center;
+	margin: 0;
+}
 
 .draggable:hover{
 	cursor: move;
@@ -124,12 +145,7 @@ body{
   #weaknessesDrag{
   	display: none;
   }
-  .container1{
-  	visibility: visible;
-  }
-  .container_actions , .container_actions{
-	  width: 30%;
-  }
+
   .subtitle{
   	display: none;
   }
@@ -142,7 +158,15 @@ body{
 	visibility: visible;	 
 	display: inline-block; 
 }
+#tableContainer{
+	width: 100%;
+	text-align: center;
+}
 
+#tableGame{
+	margin:0 10px;
+	text-align: center;
+}
 
 }
 @page 
